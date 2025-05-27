@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smile Keeper Dental</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+
+        /* Hero Section */
+        .hero-section {
+            position: relative;
+            min-height: 90vh;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('assets/src/banner.png') center/cover no-repeat;
+        }
+
+        .hero-section video {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transform: translate(-50%, -50%);
+            z-index: -1;
+        }
+
+        /* Mobile Hero Section */
+        @media (max-width: 640px) {
+            .hero-section {
+                min-height: 60vh;
+                background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('assets/src/mobile-banner.png') top/contain no-repeat;
+            }
+
+            .hero-section video {
+                width: 100%;
+                height: auto;
+                object-fit: contain;
+            }
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-out, padding 0.5s ease-out;
+        }
+
+        .faq-answer.active {
+            max-height: 500px;
+            padding-bottom: 1rem;
+        }
+
+        .nav-link:hover {
+            color: #4B5563;
+        }
+
+        .service-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .custom-footer-container {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1030;
+            padding: 5px 20px;
+            box-sizing: border-box;
+        }
+
+        .custom-footer {
+            background-color: #000000;
+            border-radius: 12px;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            padding: 10px 0px;
+        }
+
+        .footer-icon {
+            color: #d1d5db;
+            text-decoration: none;
+            padding: 10px;
+            transition: color 0.3s;
+        }
+
+        .footer-icon:hover {
+            color: #ffffff;
+        }
+
+        .footer-icon i {
+            font-size: 1.5rem;
+        }
+
+        @media (min-width: 768px) {
+            .custom-footer {
+                display: none;
+            }
+        }
+
+        /* Map Styling */
+        .map-container {
+            max-width: 800px;
+            margin: 0 auto;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            border: 2px solid #F1F1F1; /* Tailwind gray-200 */
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .map-container:hover {
+            transform: scale(1.02);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .map-container iframe {
+            width: 100%;
+            height: 450px;
+            border: 0;
+            display: block;
+        }
+
+        @media (max-width: 640px) {
+            .map-container {
+                border-radius: 8px;
+                border-width: 1px;
+            }
+
+            .map-container iframe {
+                height: 300px;
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-[#F1F1F1] text-[rgb(80,60,30)]">
+
+<!-- Navigation Bar -->
+<nav class="bg-[rgb(200,160,100)] shadow-md sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between items-center h-20">
+            <div class="flex-shrink-0">
+                <a href="/">
+                    <!-- Desktop Logo -->
+                    <img src="assets\src\Smile Keeper logos 2025 black horiz.png" alt="Smile Keeper Dental Logo"
+                         class="hidden md:block h-12 w-auto">
+                    <!-- Mobile Logo -->
+                    <img src="assets\src\Smile Keeper logos 2025 black horiz.png" alt="Smile Keeper Dental Logo"
+                         class="block md:hidden h-20 w-auto">
+                </a>
+            </div>
+            <div class="hidden md:flex space-x-8 items-center">
+                <a href="/" class="text-[rgb(80,60,30)] hover:text-[rgb(100,80,40)] font-medium nav-link">Home</a>
+                <!-- Services Dropdown -->
+                <div class="relative group">
+                    <a href="#services" class="text-[rgb(80,60,30)] hover:text-[rgb(100,80,40)] font-medium nav-link flex items-center">
+                        Services
+                        <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </a>
+                    <div class="absolute left-0 mt-2 w-64 bg-[#F1F1F1] shadow-lg rounded-lg opacity-0 group-hover:opacity-100 group-hover:visible invisible transition-all duration-300 z-50">
+                        <div class="py-2">
+                            <!-- General Dentistry -->
+                            <div class="relative group/sub">
+                                <div class="px-4 py-2 text-[rgb(80,60,30)] font-semibold flex justify-between items-center hover:bg-[rgb(230,200,150)] cursor-pointer">
+                                    General Dentistry
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                                    </svg>
+                                </div>
+                                <div class="absolute left-full top-0 mt-[-2px] w-64 bg-[#F1F1F1] shadow-lg rounded-lg opacity-0 group-hover/sub:opacity-100 group-hover/sub:visible invisible transition-all duration-300 z-50">
+                                    <a href="dental-cleaning.html" class="block px-4 py-2 text-[rgb(80,60,30)] hover:bg-[rgb(230,200,150)] hover:text-[rgb(100,80,40)]">Dental Cleaning</a>
+                                    <a href="denture-exams-and-maintenance.html" class="block px-4 py-2 text-[rgb(80,60,30)] hover:bg-[rgb(230,200,150)] hover:text-[rgb(100,80,40)]">Dental Exams & Maintenance</a>
+                                    <a href="dental-sealants.html" class="block px-4 py-2 text-[rgb(80,60,30)] hover:bg-[rgb(230,200,150)] hover:text-[rgb(100,80,40)]">Dental Sealants</a>
+                                    <a href="dental-health.html" class="block px-4 py-2 text-[rgb(80,60,30)] hover:bg-[rgb(230,200,150)] hover:text-[rgb(100,80,40)]">Dental Health</a>
+                                    <a href="dental-work-during-pregnancy.html" class="block px-4 py-2 text-[rgb(80,60,30)] hover:bg-[rgb(230,200,150)] hover:text-[rgb(100,80,40)]">Dental Work During Pregnancy</a>
+                                </div>
+                            </div>
+                            <!-- Restorative Dentistry -->
+                            <div class="relative group/sub">
+                                <div class="px-4 py-2 text-[rgb(80,60,30)] font-semibold flex justify-between items-center hover:bg-[rgb(230,200,150)] cursor-pointer">
+                                    Restorative Dentistry
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                                    </svg>
+                                </div>
+                                <div class="absolute left-full top-0 mt-[-2px] w-64 bg-[#F1F1F1] shadow-lg rounded-lg opacity-0 group-hover/sub:opacity-100 group-hover/sub:visible invisible transition-all duration-300 z-50">
+                                    <a href="fillings-and-restorations.html" class="block px-4 py-2 text-[rgb(80,60,30)] hover:bg-[rgb(230,200,150)] hover:text-[rgb(100,80,40)]">Fillings & Restorations</a>
+                                    <a href="dental-amalgam.html" class="block px-4 py-2 text-[rgb(80,60,30)] hover:bg-[rgb(230,200,150)] hover:text-[rgb(100,80,40)]">Dental Amalgam</a>
+                                    <a href="dental-bonding.html" class="block px-4 py-2 text-[rgb(80,60,30)] hover:bg-[rgb(230,200,150)] hover:text-[rgb(100,80,40)]">Dental Bonding</a>
+                                    <a href="dental-crowns.html" class="block px-4 py-2 text-[rgb(80,60,30)] hover:bg-[rgb(230,200,150)] hover:text-[rgb(100,80,40)]">Dental Crowns</a>
+                                    <a href="dental-bridges.html" class="block px-4 py-2 text-[rgb(80,60,30)] hover:bg-[rgb(230,200,150)] hover:text-[rgb(100,80,40)]">Dental Bridges</a>
+                                    <a href="non-surgical-root-canal.html" class="block px-4 py-2 text-[rgb(80,60,30)] hover:bg-[rgb(230,200,150)] hover:text-[rgb(100,80,40)]">Non-Surgical Root Canal</a>
+                                    <a href="dental-extractions.html" class="block px-4 py-2 text-[rgb(80,60,30)] hover:bg-[rgb(230,200,150)] hover:text-[rgb(100,80,40)]">Dental Extractions</a>
+                                </div>
+                            </div>
+                            <!-- Cosmetic Dentistry -->
+                            <div class="relative group/sub">
+                                <div class="px-4 py-2 text-[rgb(80,60,30)] font-semibold flex justify-between items-center hover:bg-[rgb(230,200,150)] cursor-pointer">
+                                    Cosmetic Dentistry
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                                    </svg>
+                                </div>
+                                <div class="absolute left-full top-0 mt-[-2px] w-64 bg-[#F1F1F1] shadow-lg rounded-lg opacity-0 group-hover/sub:opacity-100 group-hover/sub:visible invisible transition-all duration-300 z-50">
+                                    <a href="teeth-whitening.html" class="block px-4 py-2 text-[rgb(80,60,30)] hover:bg-[rgb(230,200,150)] hover:text-[rgb(100,80,40)]">Teeth Whitening</a>
+                                    <a href="zoom-whitening.html" class="block px-4 py-2 text-[rgb(80,60,30)] hover:bg-[rgb(230,200,150)] hover:text-[rgb(100,80,40)]">Zoom Whitening</a>
+                                    <a href="laser-smile-whitening.html" class="block px-4 py-2 text-[rgb(80,60,30)] hover:bg-[rgb(230,200,150)] hover:text-[rgb(100,80,40)]">Laser Smile Whitening</a>
+                                    <a href="porcelain-veneers.html" class="block px-4 py-2 text-[rgb(80,60,30)] hover:bg-[rgb(230,200,150)] hover:text-[rgb(100,80,40)]">Porcelain Veneers</a>
+                                    <a href="snap-on-smile.html" class="block px-4 py-2 text-[rgb(80,60,30)] hover:bg-[rgb(230,200,150)] hover:text-[rgb(100,80,40)]">Snap-On Smile</a>
+                                    <a href="invisalign.html" class="block px-4 py-2 text-[rgb(80,60,30)] hover:bg-[rgb(230,200,150)] hover:text-[rgb(100,80,40)]">Invisalign</a>
+                                    <a href="cosmetic-treatments.html" class="block px-4 py-2 text-[rgb(80,60,30)] hover:bg-[rgb(230,200,150)] hover:text-[rgb(100,80,40)]">Cosmetic Treatments</a>
+                                </div>
+                            </div>
+                            <!-- Dentures -->
+                            <div class="relative group/sub">
+                                <div class="px-4 py-2 text-[rgb(80,60,30)] font-semibold flex justify-between items-center hover:bg-[rgb(230,200,150)] cursor-pointer">
+                                    Dentures
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                                    </svg>
+                                </div>
+                                <div class="absolute left-full top-0 mt-[-2px] w-64 bg-[#F1F1F1] shadow-lg rounded-lg opacity-0 group-hover/sub:opacity-100 group-hover/sub:visible invisible transition-all duration-300 z-50">
+                                    <a href="dentures.html" class="block px-4 py-2 text-[rgb(80,60,30)] hover:bg-[rgb(230,200,150)] hover:text-[rgb(100,80,40)]">Dentures</a>
+                                    <a href="partial-dentures.html" class="block px-4 py-2 text-[rgb(80,60,30)] hover:bg-[rgb(230,200,150)] hover:text-[rgb(100,80,40)]">Partial Dentures</a>
+                                    <a href="immediate-dentures.html" class="block px-4 py-2 text-[rgb(80,60,30)] hover:bg-[rgb(230,200,150)] hover:text-[rgb(100,80,40)]">Immediate Dentures</a>
+                                    <a href="denture-relines.html" class="block px-4 py-2 text-[rgb(80,60,30)] hover:bg-[rgb(230,200,150)] hover:text-[rgb(100,80,40)]">Denture Relines</a>
+                                    <a href="denture-rebase-and-repairs.html" class="block px-4 py-2 text-[rgb(80,60,30)] hover:bg-[rgb(230,200,150)] hover:text-[rgb(100,80,40)]">Denture Rebase & Repairs</a>
+                                    <a href="softliners.html" class="block px-4 py-2 text-[rgb(80,60,30)] hover:bg-[rgb(230,200,150)] hover:text-[rgb(100,80,40)]">Soft Liners</a>
+                                    <a href="denture-care.html" class="block px-4 py-2 text-[rgb(80,60,30)] hover:bg-[rgb(230,200,150)] hover:text-[rgb(100,80,40)]">Denture Care</a>
+                                </div>
+                            </div>
+                            <!-- Dental Implants -->
+                            <div class="relative group/sub">
+                                <div class="px-4 py-2 text-[rgb(80,60,30)] font-semibold flex justify-between items-center hover:bg-[rgb(230,200,150)] cursor-pointer">
+                                    Dental Implants
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                                    </svg>
+                                </div>
+                                <div class="absolute left-full top-0 mt-[-2px] w-64 bg-[#F1F1F1] shadow-lg rounded-lg opacity-0 group-hover/sub:opacity-100 group-hover/sub:visible invisible transition-all duration-300 z-50">
+                                    <a href="dental-implants.html" class="block px-4 py-2 text-[rgb(80,60,30)] hover:bg-[rgb(230,200,150)] hover:text-[rgb(100,80,40)]">Dental Implants</a>
+                                    <a href="allon4dentalimplants.html" class="block px-4 py-2 text-[rgb(80,60,30)] hover:bg-[rgb(230,200,150)] hover:text-[rgb(100,80,40)]">All-on-4 Dental Implants</a>
+                                </div>
+                            </div>
+                            <!-- Advanced Technology -->
+                            <div class="relative group/sub">
+                                <div class="px-4 py-2 text-[rgb(80,60,30)] font-semibold flex justify-between items-center hover:bg-[rgb(230,200,150)] cursor-pointer">
+                                    Advanced Technology
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                                    </svg>
+                                </div>
+                                <div class="absolute left-full top-0 mt-[-2px] w-64 bg-[#F1F1F1] shadow-lg rounded-lg opacity-0 group-hover/sub:opacity-100 group-hover/sub:visible invisible transition-all duration-300 z-50">
+                                    <a href="cerec.html" class="block px-4 py-2 text-[rgb(80,60,30)] hover:bg-[rgb(230,200,150)] hover:text-[rgb(100,80,40)]">CEREC</a>
+                                    <a href="cerec-uses.html" class="block px-4 py-2 text-[rgb(80,60,30)] hover:bg-[rgb(230,200,150)] hover:text-[rgb(100,80,40)]">CEREC Uses</a>
+                                    <a href="e4d-dentist.html" class="block px-4 py-2 text-[rgb(80,60,30)] hover:bg-[rgb(230,200,150)] hover:text-[rgb(100,80,40)]">E4D Dentist</a>
+                                </div>
+                            </div>
+                            <!-- Periodontal Care -->
+                            <div class="relative group/sub">
+                                <div class="px-4 py-2 text-[rgb(80,60,30)] font-semibold flex justify-between items-center hover:bg-[rgb(230,200,150)] cursor-pointer">
+                                    Periodontal Care
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                                    </svg>
+                                </div>
+                                <div class="absolute left-full top-0 mt-[-2px] w-64 bg-[#F1F1F1] shadow-lg rounded-lg opacity-0 group-hover/sub:opacity-100 group-hover/sub:visible invisible transition-all duration-300 z-50">
+                                    <a href="gum-disease-laser-therapy.html" class="block px-4 py-2 text-[rgb(80,60,30)] hover:bg-[rgb(230,200,150)] hover:text-[rgb(100,80,40)]">Gum Disease Laser Therapy</a>
+                                </div>
+                            </div>        
+                        </div>
+                    </div>
+                </div>
+                <a href="dental-implants.html" class="text-[rgb(80,60,30)] hover:text-[rgb(100,80,40)] font-medium nav-link">Dental Implants</a>
+                <a href="emergencydentalservices.html" class="text-[rgb(80,60,30)] hover:text-[rgb(100,80,40)] font-medium nav-link">Emergency Dental Services</a>
+                <a href="contact-us.html" class="text-[rgb(80,60,30)] hover:text-[rgb(100,80,40)] font-medium nav-link">Contact Us</a>
+            </div>
+            <div class="md:hidden">
+                <button id="menu-toggle" class="text-[rgb(80,60,30)] hover:text-[rgb(100,80,40)] focus:outline-none">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                         xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                              d="M4 6h16M4 12h16m-7 6h7"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </div>
+    <div id="mobile-menu" class="hidden md:hidden bg-[#F1F1F1] shadow-md">
+        <div class="px-4 pt-2 pb-3 space-y-1">
+            <a href="/" class="block text-[rgb(80,60,30)] hover:text-[rgb(100,80,40)] font-medium">Home</a>
+            <!-- Mobile Services Accordion -->
+            <div>
+                <button id="services-toggle" class="w-full text-left text-[rgb(80,60,30)] hover:text-[rgb(100,80,40)] font-medium flex justify-between items-center">
+                    Services
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                </button>
+                <div id="services-menu" class="hidden pl-4 space-y-1">
+                    <!-- General Dentistry -->
+                    <div class="font-semibold text-[rgb(80,60,30)]">General Dentistry</div>
+                    <a href="dental-cleaning.html" class="block text-[rgb(80,60,30)] hover:text-[rgb(100,80,40)]">Dental Cleaning</a>
+                    <a href="denture-exams-and-maintenance.html" class="block text-[rgb(80,60,30)] hover:text-[rgb(100,80,40)]">Dental Exams & Maintenance</a>
+                    <a href="dental-sealants.html" class="block text-[rgb(80,60,30)] hover:text-[rgb(100,80,40)]">Dental Sealants</a>
+                    <a href="dental-health.html" class="block text-[rgb(80,60,30)] hover:text-[rgb(100,80,40)]">Dental Health</a>
+                    <a href="dental-work-during-pregnancy.html" class="block text-[rgb(80,60,30)] hover:text-[rgb(100,80,40)]">Dental Work During Pregnancy</a>
+                    <!-- Restorative Dentistry -->
+                    <div class="font-semibold text-[rgb(80,60,30)]">Restorative Dentistry</div>
+                    <a href="fillings-and-restorations.html" class="block text-[rgb(80,60,30)] hover:text-[rgb(100,80,40)]">Fillings & Restorations</a>
+                    <a href="dental-amalgam.html" class="block text-[rgb(80,60,30)] hover:text-[rgb(100,80,40)]">Dental Amalgam</a>
+                    <a href="dental-bonding.html" class="block text-[rgb(80,60,30)] hover:text-[rgb(100,80,40)]">Dental Bonding</a>
+                    <a href="dental-crowns.html" class="block text-[rgb(80,60,30)] hover:text-[rgb(100,80,40)]">Dental Crowns</a>
+                    <a href="dental-bridges.html" class="block text-[rgb(80,60,30)] hover:text-[rgb(100,80,40)]">Dental Bridges</a>
+                    <a href="non-surgical-root-canal.html" class="block text-[rgb(80,60,30)] hover:text-[rgb(100,80,40)]">Non-Surgical Root Canal</a>
+                    <a href="dental-extractions.html" class="block text-[rgb(80,60,30)] hover:text-[rgb(100,80,40)]">Dental Extractions</a>
+                    <!-- Cosmetic Dentistry -->
+                    <div class="font-semibold text-[rgb(80,60,30)]">Cosmetic Dentistry</div>
+                    <a href="teeth-whitening.html" class="block text-[rgb(80,60,30)] hover:text-[rgb(100,80,40)]">Teeth Whitening</a>
+                    <a href="zoom-whitening.html" class="block text-[rgb(80,60,30)] hover:text-[rgb(100,80,40)]">Zoom Whitening</a>
+                    <a href="laser-smile-whitening.html" class="block text-[rgb(80,60,30)] hover:text-[rgb(100,80,40)]">Laser Smile Whitening</a>
+                    <a href="porcelain-veneers.html" class="block text-[rgb(80,60,30)] hover:text-[rgb(100,80,40)]">Porcelain Veneers</a>
+                    <a href="snap-on-smile.html" class="block text-[rgb(80,60,30)] hover:text-[rgb(100,80,40)]">Snap-On Smile</a>
+                    <a href="invisalign.html" class="block text-[rgb(80,60,30)] hover:text-[rgb(100,80,40)]">Invisalign</a>
+                    <a href="cosmetic-treatments.html" class="block text-[rgb(80,60,30)] hover:text-[rgb(100,80,40)]">Cosmetic Treatments</a>
+                    <!-- Dentures -->
+                    <div class="font-semibold text-[rgb(80,60,30)]">Dentures</div>
+                    <a href="dentures.html" class="block text-[rgb(80,60,30)] hover:text-[rgb(100,80,40)]">Dentures</a>
+                    <a href="partial-dentures.html" class="block text-[rgb(80,60,30)] hover:text-[rgb(100,80,40)]">Partial Dentures</a>
+                    <a href="immediate-dentures.html" class="block text-[rgb(80,60,30)] hover:text-[rgb(100,80,40)]">Immediate Dentures</a>
+                    <a href="denture-relines.html" class="block text-[rgb(80,60,30)] hover:text-[rgb(100,80,40)]">Denture Relines</a>
+                    <a href="denture-rebase-and-repairs.html" class="block text-[rgb(80,60,30)] hover:text-[rgb(100,80,40)]">Denture Rebase & Repairs</a>
+                    <a href="softliners.html" class="block text-[rgb(80,60,30)] hover:text-[rgb(100,80,40)]">Soft Liners</a>
+                    <a href="denture-care.html" class="block text-[rgb(80,60,30)] hover:text-[rgb(100,80,40)]">Denture Care</a>
+                    <!-- Dental Implants -->
+                    <div class="font-semibold text-[rgb(80,60,30)]">Dental Implants</div>
+                    <a href="dental-implants.html" class="block text-[rgb(80,60,30)] hover:text-[rgb(100,80,40)]">Dental Implants</a>
+                    <a href="allon4dentalimplants.html" class="block text-[rgb(80,60,30)] hover:text-[rgb(100,80,40)]">All-on-4 Dental Implants</a>
+                    <!-- Advanced Technology -->
+                    <div class="font-semibold text-[rgb(80,60,30)]">Advanced Technology</div>
+                    <a href="cerec.html" class="block text-[rgb(80,60,30)] hover:text-[rgb(100,80,40)]">CEREC</a>
+                    <a href="cerec-uses.html" class="block text-[rgb(80,60,30)] hover:text-[rgb(100,80,40)]">CEREC Uses</a>
+                    <a href="e4d-dentist.html" class="block text-[rgb(80,60,30)] hover:text-[rgb(100,80,40)]">E4D Dentist</a>
+                    <!-- Periodontal Care -->
+                    <div class="font-semibold text-[rgb(80,60,30)]">Periodontal Care</div>
+                    <a href="gum-disease-laser-therapy.html" class="block text-[rgb(80,60,30)] hover:text-[rgb(100,80,40)]">Gum Disease Laser Therapy</a>
+                    <!-- Emergency Services -->
+                    <div class="font-semibold text-[rgb(80,60,30)]">Emergency Services</div>
+                    <a href="emergencydentalservices.html" class="block text-[rgb(80,60,30)] hover:text-[rgb(100,80,40)]">Emergency Dental Services</a>
+                </div>
+            </div>
+            <a href="contact-us.html" class="block text-[rgb(80,60,30)] hover:text-[rgb(100,80,40)] font-medium">Contact Us</a>
+        </div>
+    </div>
+</nav>
+    
+    <!-- Hero Section -->
+ <section class="hero-section">
+    <!-- Mobile Only Background Video -->
+    <div class="absolute inset-0 sm:hidden">
+        <video autoplay muted loop playsinline class="w-full h-full object-cover">
+            <source src="assets/src/skd.mp4" type="video/mp4">
+        </video>
+    </div>
+
+    <div class="p-4 sm:p-8 max-w-5xl">
+        <h1 class="text-3xl sm:text-4xl md:text-6xl font-bold text-white mb-4 sm:mb-6 tracking-tight drop-shadow-xl">
+            Welcome to Smile Keeper Dental
+        </h1>
+        <p class="text-base sm:text-lg md:text-xl text-[rgb(230,200,150)] mb-6 sm:mb-8 font-medium drop-shadow-md max-w-3xl mx-auto">
+            Your trusted partner for a brighter, healthier smile in Maryland...
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+            <a href="tel:4107662221" class="bg-[rgb(169,124,66)] text-white px-6 sm:px-8 py-2 sm:py-3 rounded-full text-base sm:text-lg font-semibold hover:bg-[rgb(100,80,40)] transition duration-300 drop-shadow-md">Book Appointment</a>
+            <a href="text:410-766-2221" class="bg-transparent border-2 border-[rgb(230,200,150)] text-white px-6 sm:px-8 py-2 sm:py-3 rounded-full text-base sm:text-lg font-semibold hover:bg-[rgb(0,0,0)] hover:border-[rgb(0,0,0)] transition duration-300 drop-shadow-md">Text 410-766-2221</a>
+        </div>
+    </div>
+</section>
+
+
+    <!-- Our Story Section -->
+    <section class="py-10 bg-[#F1F1F1]">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl md:text-4xl font-bold text-[rgb(80,60,30)] mb-12 text-center">Our Story</h2>
+            <div class="flex flex-col lg:flex-row gap-12 items-center">
+                <div class="lg:w-1/2">
+                    <p class="text-lg text-[rgb(100,80,40)] leading-relaxed">At Smile Keeper Dental, we’re dedicated to crafting healthy, confident smiles. Our Maryland-based team combines cutting-edge technology with a compassionate, patient-first approach to deliver exceptional dental care.</p>
+                </div>
+                <div class="lg:w-1/2 grid grid-cols-2 sm:grid-cols-4 gap-8 text-center">
+                    <div>
+                        <p class="text-4xl font-bold text-[rgb(80,60,30)]">5K+</p>
+                        <p class="text-[rgb(100,80,40)]">Patients Treated</p>
+                    </div>
+                    <div>
+                        <p class="text-4xl font-bold text-[rgb(80,60,30)]">98%</p>
+                        <p class="text-[rgb(100,80,40)]">Patient Satisfaction</p>
+                    </div>
+                    <div>
+                        <p class="text-4xl font-bold text-[rgb(80,60,30)]">20+</p>
+                        <p class="text-[rgb(100,80,40)]">Years of Experience</p>
+                    </div>
+                    <div>
+                        <p class="text-4xl font-bold text-[rgb(80,60,30)]">50+</p>
+                        <p class="text-[rgb(100,80,40)]">Awards & Honors</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Services Section -->
+    <section id="services" class="py-10 bg-[rgb(241, 241, 241),]">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl md:text-4xl font-bold text-[rgb(80,60,30)] mb-12 text-center">Our Services</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="bg-[#E9C999] p-6 rounded-xl shadow-md text-center service-card">
+                    <img src="assets/src/dentalemergency4.png" alt="Emergency Dental Services" class="w-full h-48 object-cover rounded-lg mb-4">
+                    <h3 class="text-xl font-semibold text-[rgb(80,60,30)] mb-2">Emergency Dental Services</h3>
+                    <p class="text-[rgb(100,80,40)] mb-4">24/7 care for urgent dental needs.</p>
+                    <a href="emergencydentalservices.html" class="text-[rgb(100,80,40)] font-semibold hover:text-[rgb(80,60,30)]">Learn More</a>
+                </div>
+                <div class="bg-[#E9C999] p-6 rounded-xl shadow-md text-center service-card">
+                    <img src="assets/src/implants.png" alt="Dental Implants" class="w-full h-48 object-cover rounded-lg mb-4">
+                    <h3 class="text-xl font-semibold text-[rgb(80,60,30)] mb-2">Dental Implants</h3>
+                    <p class="text-[rgb(100,80,40)] mb-4">Durable solutions for missing teeth.</p>
+                    <a href="dental-implants.html" class="text-[rgb(100,80,40)] font-semibold hover:text-[rgb(80,60,30)]">Learn More</a>
+                </div>
+                <div class="bg-[#E9C999] p-6 rounded-xl shadow-md text-center service-card">
+                    <img src="assets/src/Invisalign.png" alt="Clear Aligners" class="w-full h-48 object-cover rounded-lg mb-4">
+                    <h3 class="text-xl font-semibold text-[rgb(80,60,30)] mb-2">Clear Aligners</h3>
+                    <p class="text-[rgb(100,80,40)] mb-4">Invisible braces for a perfect smile.</p>
+                    <a href="invisalign.html" class="text-[rgb(100,80,40)] font-semibold hover:text-[rgb(80,60,30)]">Learn More</a>
+                </div>
+                <div class="bg-[#E9C999] p-6 rounded-xl shadow-md text-center service-card">
+                    <img src="assets/src/allon4.png" alt="allon4" class="w-full h-48 object-cover rounded-lg mb-4">
+                    <h3 class="text-xl font-semibold text-[rgb(80,60,30)] mb-2">All on 4</h3>
+                    <p class="text-[rgb(100,80,40)] mb-4">Put on Your Perfect Smile in a Instant</p>
+                    <a href="allon4dentalimplants.html" class="text-[rgb(100,80,40)] font-semibold hover:text-[rgb(80,60,30)]">Learn More</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Free Dental Consultation Section -->
+    <section id="consultation" class="py-12 bg-[#F1F1F1] shadow-md text-center">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl md:text-4xl font-bold text-[rgb(80,60,30)] mb-6">Free Dental Consultation</h2>
+            <p class="text-lg text-[rgb(100,80,40)] mb-8 max-w-3xl mx-auto"> Video consultations, Private consultation + Audio call for all your doubts!</p>
+            <a href="tel:4107662221" class="bg-[rgb(169,124,66)] text-white px-8 py-3 rounded-full text-lg font-semibold hover:bg-[rgb(100,80,40)] transition duration-300">Book A Free Dental Consultation</a>
+        </div>
+    </section>
+
+    <!-- Locate Us Section -->
+    <section id="locate" class="py-10 bg-[#F9F9F9]">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl md:text-4xl font-bold text-[rgb(80,60,30)] mb-12 text-center">Locate Us</h2>
+            <div class="map-container">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d12378.986821450639!2d-76.586154!3d39.134995!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89b7fc65b46c48b7%3A0x8ca50eac7d79c034!2sSmile%20Keeper%20Dental!5e0!3m2!1sen!2sin!4v1748300284564!5m2!1sen!2sin" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="faq" class="py-10 bg-[#F9F9F9]">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl md:text-4xl font-bold text-[rgb(80,60,30)] mb-12 text-center">Frequently Asked Questions</h2>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <div class="bg-[#F1F1F1] rounded-xl shadow-md">
+                    <button class="w-full text-left px-6 py-4 flex justify-between items-center hover:bg-[rgb(230,200,150)] transition duration-200 focus:outline-none faq-toggle">
+                        <span class="text-lg font-semibold text-[rgb(80,60,30)]">What services does Smile Keeper Dental offer?</span>
+                        <svg class="w-5 h-5 text-[rgb(100,80,40)] transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </button>
+                    <div class="faq-answer px-6">
+                        <p class="text-[rgb(100,80,40)]">Smile Keeper Dental provides a range of services including teeth whitening, orthodontics, dental implants, preventative care, and cosmetic dentistry.</p>
+                    </div>
+                </div>
+                <div class="bg-[#F1F1F1] rounded-xl shadow-md">
+                    <button class="w-full text-left px-6 py-4 flex justify-between items-center hover:bg-[rgb(230,200,150)] transition duration-200 focus:outline-none faq-toggle">
+                        <span class="text-lg font-semibold text-[rgb(80,60,30)]">How do I book an appointment?</span>
+                        <svg class="w-5 h-5 text-[rgb(100,80,40)] transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </button>
+                    <div class="faq-answer px-6">
+                        <p class="text-[rgb(100,80,40)]">You can book an appointment online through our website or by calling our office directly.</p>
+                    </div>
+                </div>
+                <div class="bg-[#F1F1F1] rounded-xl shadow-md">
+                    <button class="w-full text-left px-6 py-4 flex justify-between items-center hover:bg-[rgb(230,200,150)] transition duration-200 focus:outline-none faq-toggle">
+                        <span class="text-lg font-semibold text-[rgb(80,60,30)]">Do you offer emergency dental services?</span>
+                        <svg class="w-5 h-5 text-[rgb(100,80,40)] transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </button>
+                    <div class="faq-answer px-6">
+                        <p class="text-[rgb(100,80,40)]">Yes, we provide emergency dental services for urgent cases. Contact us immediately for assistance.</p>
+                    </div>
+                </div>
+                <div class="bg-[#F1F1F1] rounded-xl shadow-md">
+                    <button class="w-full text-left px-6 py-4 flex justify-between items-center hover:bg-[rgb(230,200,150)] transition duration-200 focus:outline-none faq-toggle">
+                        <span class="text-lg font-semibold text-[rgb(80,60,30)]">Are your treatments covered by insurance?</span>
+                        <svg class="w-5 h-5 text-[rgb(100,80,40)] transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </button>
+                    <div class="faq-answer px-6">
+                        <p class="text-[rgb(100,80,40)]">We accept most major insurance plans. Please contact our office to verify your coverage.</p>
+                    </div>
+                </div>
+                <div class="bg-[#F1F1F1] rounded-xl shadow-md">
+                    <button class="w-full text-left px-6 py-4 flex justify-between items-center hover:bg-[rgb(230,200,150)] transition duration-200 focus:outline-none faq-toggle">
+                        <span class="text-lg font-semibold text-[rgb(80,60,30)]">Can I schedule a consultation with a dentist?</span>
+                        <svg class="w-5 h-5 text-[rgb(100,80,40)] transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </button>
+                    <div class="faq-answer px-6">
+                        <p class="text-[rgb(100,80,40)]">Yes, we offer free dental consultations to discuss your needs and treatment options.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center mt-12">
+                <p class="text-[rgb(100,80,40)] mb-4">Still have more questions? Talk to our customer happiness team.</p>
+                <a href="tel:4107662221" class="bg-[rgb(169,124,66)] text-white px-6 py-3 rounded-full text-base font-semibold hover:bg-[rgb(100,80,40)] transition duration-300">Talk to Us</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12 bg-black text-[rgb(230,200,150)]">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div>
+                    <div class="flex-shrink-0">
+                        <a href="/">
+                            <img src="assets/src/Smile Keeper logos 2025 white stack.png" alt="Smile Keeper Dental Logo" class="h-28 w-auto">
+                        </a>
+                    </div>
+                    <p class="text-[rgb(230,200,150)]">Your trusted partner for a brighter smile in Maryland.</p>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold text-white mb-4">Quick Links</h3>
+                    <ul class="space-y-2">
+                        <li><a href="snap-on-smile.html" class="text-[rgb(230,200,150)] hover:text-gray-200">Snap On Smile</a></li>
+                        <li><a href="dental-implants.html" class="text-[rgb(230,200,150)] hover:text-gray-200">Dental Implants</a></li>
+                        <li><a href="allon4dentalimplants.html" class="text-[rgb(230,200,150)] hover:text-gray-200">All On 4</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold text-white mb-4">Contact Us</h3>
+                    <p class="text-[rgb(230,200,150)]">Phone: <a href="tel:4107662221" class="hover:text-gray-200">410-766-2221</a></p>
+                    <p class="text-[rgb(230,200,150)]">Address: <a href="https://maps.app.goo.gl/HwhkKhymu3ikqjhE6" class="hover:text-gray-200">7954 Baltimore Annapolis Blvd Suite 1C, Glen Burnie, MD 21060</a></p>
+                </div>
+            </div>
+            <div class="mt-8 text-center">
+                <p>© 2025 Smile Keeper Dental. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+    
+    <div class="custom-footer-container">
+        <nav class="custom-footer">
+            <a href="tel:+14107662221" class="footer-icon">
+                <i class="bi bi-telephone-fill"></i>
+            </a>
+            <a
+                href="https://maps.app.goo.gl/HwhkKhymu3ikqjhE6"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="footer-icon"
+            >
+                <i class="bi bi-geo-alt-fill"></i>
+            </a>
+            <a
+                href="https://www.instagram.com/smilekeeperdental/"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="footer-icon"
+            >
+                <i class="bi bi-instagram"></i>
+            </a>
+            <a href="tel:+14107662221" class="footer-icon">
+                <i class="bi bi-chat-fill"></i>
+            </a>
+        </nav>
+    </div>
+
+    <!-- JavaScript for FAQ Accordion and Mobile Menu -->
+    <script>
+        // FAQ Accordion
+        document.querySelectorAll('.faq-toggle').forEach(button => {
+            button.addEventListener('click', () => {
+                const answer = button.nextElementSibling;
+                const icon = button.querySelector('svg');
+
+                answer.classList.toggle('active');
+                icon.classList.toggle('rotate-180');
+
+                if (answer.classList.contains('active')) {
+                    answer.style.maxHeight = answer.scrollHeight + 'px';
+                } else {
+                    answer.style.maxHeight = '0';
+                }
+            });
+        });
+
+        // Mobile Menu Toggle
+        const menuToggle = document.getElementById('menu-toggle');
+        const mobileMenu = document.getElementById('mobile-menu');
+        menuToggle.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smile Keeper Dental - Emergency Services</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+
+        /* Hero Section */
+        .hero-section {
+            position: relative;
+            min-height: 90vh;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('assets/src/emergency-banner.png') center/cover no-repeat;
+        }
+
+        .hero-section video {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transform: translate(-50%, -50%);
+            z-index: -1;
+        }
+
+        /* Mobile Hero Section */
+        @media (max-width: 640px) {
+            .hero-section {
+                min-height: 60vh;
+                background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('assets/src/mobile-emergency-banner.png') top/contain no-repeat;
+            }
+
+            .hero-section video {
+                width: 100%;
+                height: auto;
+                object-fit: contain;
+            }
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-out, padding 0.5s ease-out;
+        }
+
+        .faq-answer.active {
+            max-height: 500px;
+            padding-bottom: 1rem;
+        }
+
+        .nav-link:hover {
+            color: #4B5563;
+        }
+
+        .service-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .custom-footer-container {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1030;
+            padding: 5px 20px;
+            box-sizing: border-box;
+        }
+
+        .custom-footer {
+            background-color: #000000;
+            border-radius: 12px;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            padding: 10px 0px;
+        }
+
+        .footer-icon {
+            color: #d1d5db;
+            text-decoration: none;
+            padding: 10px;
+            transition: color 0.3s;
+        }
+
+        .footer-icon:hover {
+            color: #ffffff;
+        }
+
+        .footer-icon i {
+            font-size: 1.5rem;
+        }
+
+        @media (min-width: 768px) {
+            .custom-footer {
+                display: none;
+            }
+        }
+
+        /* Map Styling */
+        .map-container {
+            max-width: 800px;
+            margin: 0 auto;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            border: 2px solid #F1F1F1;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .map-container:hover {
+            transform: scale(1.02);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .map-container iframe {
+            width: 100%;
+            height: 450px;
+            border: 0;
+            display: block;
+        }
+
+        @media (max-width: 640px) {
+            .map-container {
+                border-radius: 8px;
+                border-width: 1px;
+            }
+
+            .map-container iframe {
+                height: 300px;
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-[#F1F1F1] text-[rgb(80,60,30)]">
+
+<!-- Navigation Bar -->
+<nav class="bg-[rgb(200,160,100)] shadow-md sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between items-center h-20">
+            <div class="flex-shrink-0">
+                <a href="/">
+                    <img src="assets/src/Smile Keeper logos 2025 black horiz.png" alt="Smile Keeper Dental Logo"
+                         class="hidden md:block h-12 w-auto">
+                    <img src="assets/src/Smile Keeper logos 2025 black horiz.png" alt="Smile Keeper Dental Logo"
+                         class="block md:hidden h-20 w-auto">
+                </a>
+            </div>
+            <div class="hidden md:flex space-x-8">
+                <a href="#services" class="text-[rgb(80,60,30)] hover:text-[rgb(100,80,40)] font-medium nav-link">Emergency Services</a>
+                <a href="#faq" class="text-[rgb(80,60,30)] hover:text-[rgb(100,80,40)] font-medium nav-link">FAQ</a>
+                <a href="#booking" class="text-[rgb(80,60,30)] hover:text-[rgb(100,80,40)] font-medium nav-link">Get Help Now</a>
+                <a href="tel:410-766-2221" class="text-[rgb(80,60,30)] hover:text-[rgb(100,80,40)] font-medium nav-link">Contact</a>
+            </div>
+            <div class="md:hidden">
+                <button id="menu-toggle" class="text-[rgb(80,60,30)] hover:text-[rgb(100,80,40)] focus:outline-none">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                         xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                              d="M4 6h16M4 12h16m-7 6h7"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </div>
+    <div id="mobile-menu" class="hidden md:hidden bg-[#F1F1F1] shadow-md">
+        <div class="px-4 pt-2 pb-3 space-y-1">
+            <a href="#services" class="block text-[rgb(80,60,30)] hover:text-[rgb(100,80,40)] font-medium">Emergency Services</a>
+            <a href="#faq" class="block text-[rgb(80,60,30)] hover:text-[rgb(100,80,40)] font-medium">FAQ</a>
+            <a href="#booking" class="block text-[rgb(80,60,30)] hover:text-[rgb(100,80,40)] font-medium">Get Help Now</a>
+            <a href="tel:410-766-2221" class="block text-[rgb(80,60,30)] hover:text-[rgb(100,80,40)] font-medium">Contact</a>
+        </div>
+    </div>
+</nav>
+
+<!-- Hero Section -->
+<section class="hero-section">
+    <div class="absolute inset-0 sm:hidden">
+        <video autoplay muted loop playsinline class="w-full h-full object-cover">
+            <source src="assets/src/emergency-skd.mp4" type="video/mp4">
+        </video>
+    </div>
+
+    <div>
+        <h1 class="text-3xl sm:text-4xl md:text-6xl font-bold text-white mb-4 sm:mb-6 tracking-tight drop-shadow-xl">
+            Emergency Dental Care at Smile Keeper
+        </h1>
+        <p class="text-base sm:text-lg md:text-xl text-[rgb(230,200,150)] mb-6 sm:mb-8 font-medium drop-shadow-md max-w-3xl mx-auto">
+            Immediate relief for dental emergencies in Maryland, available 24/7.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+            <a href="#booking" class="bg-[rgb(169,124,66)] text-white px-6 sm:px-8 py-2 sm:py-3 rounded-full text-base sm:text-lg font-semibold hover:bg-[rgb(100,80,40)] transition duration-300 drop-shadow-md">Get Help Now</a>
+            <a href="tel:410-766-2221" class="bg-transparent border-2 border-[rgb(230,200,150)] text-white px-6 sm:px-8 py-2 sm:py-3 rounded-full text-base sm:text-lg font-semibold hover:bg-[rgb(0,0,0)] hover:border-[rgb(0,0,0)] transition duration-300 drop-shadow-md">Call 410-766-2221</a>
+        </div>
+    </div>
+</section>
+
+<section class="py-10 px-6 max-w-6xl mx-auto">
+    <h1 class="text-4xl md:text-5xl font-bold text-center mb-10 text-[rgb(80,60,30)]">Emergency Dental Services</h1>
+
+    <div class="grid md:grid-cols-2 gap-10 items-center">
+        <img src="assets/src/emergency-dental.png" alt="Emergency Dental Care" class="rounded-xl shadow-md w-full">
+
+        <div>
+            <h2 class="text-2xl font-semibold mb-4">Fast Relief for Dental Emergencies</h2>
+            <p class="mb-4 text-[rgb(100,80,40)]">At Smile Keeper Dental, we provide immediate care for dental emergencies, from severe toothaches to broken teeth. Our experienced team is ready to restore your comfort and health 24/7.</p>
+            <ul class="list-disc list-inside text-[rgb(100,80,40)] mb-6">
+                <li>Knocked-out or broken teeth</li>
+                <li>Severe tooth pain or abscesses</li>
+                <li>Lost fillings or crowns</li>
+                <li>Facial swelling or trauma</li>
+            </ul>
+            <a href="#booking" class="inline-block bg-[rgb(169,124,66)] text-white px-6 py-3 rounded-full font-semibold hover:bg-[rgb(100,80,40)] transition duration-300">Get Immediate Care</a>
+        </div>
+    </div>
+
+    <div class="mt-16">
+        <h3 class="text-2xl font-semibold mb-4">When to Seek Emergency Care?</h3>
+        <p class="text-[rgb(100,80,40)] mb-4">If you’re experiencing severe pain, swelling, or a dental injury, don’t wait. Our team provides prompt treatment to prevent complications and relieve discomfort.</p>
+        <p class="text-[rgb(100,80,40)]">Smile Keeper Dental offers comprehensive emergency care, from diagnosis to treatment, ensuring you’re back to smiling confidently.</p>
+    </div>
+</section>
+
+<!-- Free Emergency Consultation Section -->
+<section id="consultation" class="py-5 bg-[#F1F1F1] shadow-md text-center">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 class="text-3xl md:text-4xl font-bold text-[rgb(80,60,30)] mb-6">Free Emergency Consultation</h2>
+        <p class="text-lg text-[rgb(100,80,40)] mb-8 max-w-3xl mx-auto">24/7 video or phone consultations to address your urgent dental needs.</p>
+        <a href="#booking" class="bg-[rgb(169,124,66)] text-white px-8 py-3 rounded-full text-lg font-semibold hover:bg-[rgb(100,80,40)] transition duration-300">Book a Free Consultation</a>
+    </div>
+</section>
+
+<!-- Locate Us Section -->
+<section id="locate" class="py-10 bg-[#F9F9F9]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 class="text-3xl md:text-4xl font-bold text-[rgb(80,60,30)] mb-12 text-center">Find Our Emergency Clinic</h2>
+        <div class="map-container">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d12378.986821450639!2d-76.586154!3d39.134995!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89b7fc65b46c48b7%3A0x8ca50eac7d79c034!2sSmile%20Keeper%20Dental!5e0!3m2!1sen!2sin!4v1748300284564!5m2!1sen!2sin" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+    </div>
+</section>
+
+<section class="py-10 bg-[#F9F9F9]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 class="text-3xl md:text-4xl font-bold text-[rgb(80,60,30)] mb-12 text-center">Emergency Dental FAQ</h2>
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <div class="bg-[#F1F1F1] rounded-xl shadow-md">
+                <button class="w-full text-left px-6 py-4 flex justify-between items-center hover:bg-[rgb(230,200,150)] transition duration-200 focus:outline-none faq-toggle">
+                    <span class="text-lg font-semibold text-[rgb(80,60,30)]">What qualifies as a dental emergency?</span>
+                    <svg class="w-5 h-5 text-[rgb(100,80,40)] transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                </button>
+                <div class="faq-answer px-6">
+                    <p class="text-[rgb(100,80,40)]">Severe pain, swelling, bleeding, knocked-out teeth, or injuries to the mouth are considered emergencies requiring immediate care.</p>
+                </div>
+            </div>
+
+            <div class="bg-[#F1F1F1] rounded-xl shadow-md">
+                <button class="w-full text-left px-6 py-4 flex justify-between items-center hover:bg-[rgb(230,200,150)] transition duration-200 focus:outline-none faq-toggle">
+                    <span class="text-lg font-semibold text-[rgb(80,60,30)]">Is emergency dental care painful?</span>
+                    <svg class="w-5 h-5 text-[rgb(100,80,40)] transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                </button>
+                <div class="faq-answer px-6">
+                    <p class="text-[rgb(100,80,40)]">We use local anesthesia to ensure comfort during procedures. Most patients experience significant relief after treatment.</p>
+                </div>
+            </div>
+
+            <div class="bg-[#F1F1F1] rounded-xl shadow-md">
+                <button class="w-full text-left px-6 py-4 flex justify-between items-center hover:bg-[rgb(230,200,150)] transition duration-200 focus:outline-none faq-toggle">
+                    <span class="text-lg font-semibold text-[rgb(80,60,30)]">How quickly can I be seen?</span>
+                    <svg class="w-5 h-5 text-[rgb(100,80,40)] transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                </button>
+                <div class="faq-answer px-6">
+                    <p class="text-[rgb(100,80,40)]">Our 24/7 emergency services ensure you’re seen as soon as possible, often within hours of your call.</p>
+                </div>
+            </div>
+
+            <div class="bg-[#F1F1F1] rounded-xl shadow-md">
+                <button class="w-full text-left px-6 py-4 flex justify-between items-center hover:bg-[rgb(230,200,150)] transition duration-200 focus:outline-none faq-toggle">
+                    <span class="text-lg font-semibold text-[rgb(80,60,30)]">What should I do before arriving?</span>
+                    <svg class="w-5 h-5 text-[rgb(100,80,40)] transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                </button>
+                <div class="faq-answer px-6">
+                    <p class="text-[rgb(100,80,40)]">Rinse your mouth with warm water, apply a cold compress for swelling, and call us immediately for guidance.</p>
+                </div>
+            </div>
+        </div>
+        <div class="text-center mt-12">
+            <p class="text-[rgb(100,80,40)] mb-4">Need urgent answers about your dental emergency?</p>
+            <a href="#contact" class="bg-[rgb(169,124,66)] text-white px-6 py-3 rounded-full text-base font-semibold hover:bg-[rgb(100,80,40)] transition duration-300">Talk to a Specialist</a>
+        </div>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer class="py-12 bg-black text-[rgb(230,200,150)]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div>
+                <div class="flex-shrink-0">
+                    <a href="/">
+                        <img src="assets/src/Smile Keeper logos 2025 white stack.png" alt="Smile Keeper Dental Logo" class="h-28 w-auto">
+                    </a>
+                </div>
+                <p class="text-[rgb(230,200,150)]">Your trusted partner for emergency dental care in Maryland.</p>
+            </div>
+            <div>
+                <h3 class="text-lg font-semibold text-white mb-4">Quick Links</h3>
+                <ul class="space-y-2">
+                    <li><a href="#services" class="text-[rgb(230,200,150)] hover:text-gray-200">Emergency Services</a></li>
+                    <li><a href="#faq" class="text-[rgb(230,200,150)] hover:text-gray-200">FAQ</a></li>
+                    <li><a href="#booking" class="text-[rgb(230,200,150)] hover:text-gray-200">Get Help Now</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3 class="text-lg font-semibold text-white mb-4">Contact Us</h3>
+                <p class="text-[rgb(230,200,150)]">Phone: <a href="tel:410-766-2221" class="hover:text-gray-200">410-766-2221</a></p>
+                <p class="text-[rgb(230,200,150)]">Email: <a href="mailto:info@smilekeeperdental.com" class="hover:text-gray-200">info@smilekeeperdental.com</a></p>
+            </div>
+        </div>
+        <div class="mt-8 text-center">
+            <p>© 2025 Smile Keeper Dental. All rights reserved.</p>
+        </div>
+    </div>
+</footer>
+
+<div class="custom-footer-container">
+    <nav class="custom-footer">
+        <a href="tel:+14107662221" class="footer-icon">
+            <i class="bi bi-telephone-fill"></i>
+        </a>
+        <a href="https://maps.app.goo.gl/HwhkKhymu3ikqjhE6" target="_blank" rel="noopener noreferrer" class="footer-icon">
+            <i class="bi bi-geo-alt-fill"></i>
+        </a>
+        <a href="https://www.instagram.com/smilekeeperdental/" target="_blank" rel="noopener noreferrer" class="footer-icon">
+            <i class="bi bi-instagram"></i>
+        </a>
+        <a href="tel:+14107662221" class="footer-icon">
+            <i class="bi bi-chat-fill"></i>
+        </a>
+    </nav>
+</div>
+
+<!-- JavaScript for FAQ Accordion and Mobile Menu -->
+<script>
+    document.querySelectorAll('.faq-toggle').forEach(button => {
+        button.addEventListener('click', () => {
+            const answer = button.nextElementSibling;
+            const icon = button.querySelector('svg');
+
+            answer.classList.toggle('active');
+            icon.classList.toggle('rotate-180');
+
+            if (answer.classList.contains('active')) {
+                answer.style.maxHeight = answer.scrollHeight + 'px';
+            } else {
+                answer.style.maxHeight = '0';
+            }
+        });
+    });
+
+    const menuToggle = document.getElementById('menu-toggle');
+    const mobileMenu = document.getElementById('mobile-menu');
+    menuToggle.addEventListener('click', () => {
+        mobileMenu.classList.toggle('hidden');
+    });
+</script>
+</body>
+</html>
